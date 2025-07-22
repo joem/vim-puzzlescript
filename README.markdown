@@ -24,17 +24,43 @@ Install using your favourite package manager, or use Vim's built-in package supp
     cd ~/.vim/pack/tpope/start
     git clone https://github.com/tpope/vim-vinegar.git
 
-## Details
+## Usage
+
+**TODO: Maybe move this bit up to the main section??**
+
+Whenever you load a PuzzleScript file with the `.pz` extension (or manually set the filetype with `:set ft=puzzlescript`), this plugin will highlight the file for you. By default the colors are set to mimic the PuzzleScript editor in dark mode.
+
+You can switch the PuzzleScript colors to light mode by adding the following to your `.vimrc`:
+
+```vim
+" Set the custom PuzzleScript colors to light theme instead of the default dark:
+let g:pz_light_colors = 1
+```
+
+*NOTE: The light colors haven't been set up yet, so this will just make no highlighting occur.*
+
+Or you can disable these colors entirely and let Vim highlight them according to your current colorscheme. To do so, add this line to your `.vimrc`:
+
+```vim
+" Disable the custom PuzzleScript syntax colors and stick to standard groups:
+let g:pz_disable_custom_colors = 1
+```
+
+*NOTE: The standard highlight groups haven't been set up yet, so this will just make no highlighting occur.*
 
 
-### ftdetect/puzzlescript.vim
+## ftdetect/puzzlescript.vim
+
+**TODO: Remove this section when I no longer need the notes/todos!**
 
 clean this up
 
 look at other ftdetect scripts to see if there's anything else I should do
 
 
-### syntax/puzzlescript.vim
+## syntax/puzzlescript.vim
+
+**TODO: Remove this section when I no longer need the notes/todos!**
 
 Still to do:
 
