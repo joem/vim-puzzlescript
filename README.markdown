@@ -16,44 +16,25 @@ General to-do:
 Look to some Tim Pope plugins to see probably best-practices:
 https://github.com/tpope/vim-vinegar
 
+## Installation
 
-## colors/puzzlescript.vim
+Install using your favourite package manager, or use Vim's built-in package support:
 
-TODO: Add all the colors from the syntax as a color scheme and set up some rules to optionally use them just for puzzlescript files.
-See the following for help with that:
-https://stackoverflow.com/questions/50134833/set-a-colorscheme-for-a-filetype-in-vim
-https://stackoverflow.com/questions/5171184/how-to-set-a-different-colorscheme-for-each-file-type-in-vim
+    mkdir -p ~/.vim/pack/tpope/start
+    cd ~/.vim/pack/tpope/start
+    git clone https://github.com/tpope/vim-vinegar.git
 
-Checkout vim's default colorschemes to see how they're set up and formatted and such.
-
-- https://github.com/vim/vim/blob/master/runtime/colors/elflord.vim
-- https://github.com/vim/vim/blob/master/runtime/colors/
-
-and some more complex themes:
-https://github.com/morhetz/gruvbox/blob/master/colors/gruvbox.vim
-
-some help:
-https://vi.stackexchange.com/questions/2782/how-can-i-create-my-own-colorscheme
+## Details
 
 
-## ftdetect/puzzlescript.vim
+### ftdetect/puzzlescript.vim
 
 clean this up
 
 look at other ftdetect scripts to see if there's anything else I should do
 
 
-## ftplugin/puzzlescript.vim
-
-Set it up to use colors/puzzlescript.vim colorscheme when and only when using puzzlescript (.pz) files.
-See the following for help with that:
-https://stackoverflow.com/questions/50134833/set-a-colorscheme-for-a-filetype-in-vim
-https://stackoverflow.com/questions/5171184/how-to-set-a-different-colorscheme-for-each-file-type-in-vim
-
-Make it able to be set to not use the puzzlescript colorscheme, if desired.
-
-
-## syntax/puzzlescript.vim
+### syntax/puzzlescript.vim
 
 Still to do:
 
@@ -64,6 +45,7 @@ Still to do:
 - [ ] Get `[>` and `|>` highlighting working right (in the RULES section, or everywhere)
 - [ ] Highlight object names in WINCONDITIONS section
 - [ ] Highlight the levels in the LEVELS section
+- [ ] ...and fix anything with a TODO or FIXME label
 
 " TODO: These pzRuleCommandWords show up bold in the rules section, but the
 " ones that are also in pzSoundEvents (like `restart`) don't show up bold in
@@ -85,4 +67,8 @@ Still to do:
 clean up the file and all the temporary lines throughout and at the end
 
 
+## License
+
+Copyright © Joe Miragliuolo.  Distributed under the same terms as Vim itself.
+See `:help license` in Vim.
 
