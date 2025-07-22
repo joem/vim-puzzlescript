@@ -30,12 +30,20 @@ Install using your favourite package manager, or use Vim's built-in package supp
 
 Whenever you load a PuzzleScript file with the `.pz` extension (or manually set the filetype with `:set ft=puzzlescript`), this plugin will highlight the file for you. By default the colors are set to mimic the PuzzleScript editor in dark mode.
 
+{TODO: Insert screenshot here!}
+
+{TODO: Mention what background color to optimally set, and how to do it.}
+
 You can switch the PuzzleScript colors to light mode by adding the following to your `.vimrc`:
 
 ```vim
 " Set the custom PuzzleScript colors to light theme instead of the default dark:
 let g:pz_light_colors = 1
 ```
+
+{TODO: Insert screenshot here!}
+
+{TODO: Mention what background color to optimally set, and how to do it.}
 
 *NOTE: The light colors haven't been set up yet, so this will just make no highlighting occur.*
 
