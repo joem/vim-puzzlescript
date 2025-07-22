@@ -1,4 +1,4 @@
-# vim-puzzlescript
+# puzzlescript.vim
 
 This is a plugin primarily to add syntax highlighting to PuzzleScript (.pz) files.
 
