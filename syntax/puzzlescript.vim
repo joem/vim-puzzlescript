@@ -17,36 +17,11 @@ if exists("b:current_syntax")
 endif
 
 
-" Still to do:
-" - [ ] Highlight the object names in the OBJECTS section
-" - [ ] Highlight the characters and names in the LEGEND section
-" - [ ] Highlight the object names in the SOUNDS section
-" - [ ] Highlight the object names in the COLLISIONLAYERS section
-" - [ ] Get `[>` and `|>` highlighting working right (in the RULES section, or everywhere)
-" - [ ] Highlight object names in WINCONDITIONS section
-" - [ ] Highlight the levels in the LEVELS section
-" - [ ] ...and fix any of the areas here marked TODO or FIXME.
-
-" TODO: These pzRuleCommandWords show up bold in the rules section, but the
-" ones that are also in pzSoundEvents (like `restart`) don't show up bold in
-" the sounds section.
-
-" TODO: Make 'no' get highlighted differently in rules vs winconditions!
-
-" TODO: Do `highlight link` instead of just `highlight` so you can link them
-" to proper highlight groups so that people can use whatever colorscheme works
-" for them.
-" See https://vimhelp.org/syntax.txt.html#group-name for the available groups.
-
-" TODO: clean up this file and all the temporary lines throughout and at the end
-
-
-
-" PuzzleScript is case sensitive, but we want this to only match `todo` in allcaps
+" PuzzleScript is case insensitive, but we want this to only match `todo` in allcaps
 syn case match
 syn keyword pzTodo contained  TODO
 
-" Back to PuzzleScript is case sensitive
+" Back to PuzzleScript is case insensitive
 syn case ignore
 
 " region is needed instead of simpler "(.*)" so that it catches multiline
