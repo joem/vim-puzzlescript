@@ -32,32 +32,6 @@ let g:pz_disable_custom_colors = 1
 *NOTE: The standard highlight groups in this syntax haven't been set up yet, so this will just make no highlighting occur right now. This will be fixed soon.*
 
 
-## General to-do:
-
-- [ ] Clean everything up!
-
-- [ ] Check out vim's built in syntax files to see best practices: https://github.com/vim/vim/tree/master/runtime/syntax
-
-- [ ] Look to some Tim Pope plugins to see probably best-practices: https://github.com/tpope/vim-vinegar
-
-- [ ] Look at other syntax plugins to see probably best-practices:
-
-
-- [ ] Make the syntax work OK in terminals that support 256+ colors.
-
-- [ ] Turn the stuff from the Extra Settings section into a plugin that can be optionally disabled (or optionally enabled?), and that returns the settings to normal when leaving a puzzlescript buffer.
-  - See the following for help with that:
-    - https://stackoverflow.com/questions/50134833/set-a-colorscheme-for-a-filetype-in-vim
-    - https://stackoverflow.com/questions/5171184/how-to-set-a-different-colorscheme-for-each-file-type-in-vim
-  - Maybe check out some colorschemes too:
-    - https://github.com/vim/vim/tree/master/runtime/colors
-    - https://github.com/dracula/vim
-  - Maybe check out some other popular plugins:
-    - https://github.com/preservim/nerdtree
-    - https://github.com/vim-airline/vim-airline
-
-
-
 ## Installation
 
 Install using your favourite package manager, or use Vim's built-in package support:
