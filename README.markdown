@@ -1,38 +1,15 @@
 # puzzlescript.vim
 
 This is a plugin primarily to add syntax highlighting to PuzzleScript (.pz) files.
+(For more about PuzzleScript, see here: [https://www.puzzlescript.net](https://www.puzzlescript.net))
 
-For more about PuzzleScript, see here: https://www.puzzlescript.net
+(Note: Unlike the PuzzleScript editor, colors here do not indicate a lack of errors. This syntax highlighting does not check the validity of your code.)
 
-Initially, the colors will be hardcoded in the syntax highlighting and they'll match the colors in the PuzzleScript editor as closely as possible. But I'd like to break the colors out into their own colorscheme which gets loaded when you open a PuzzleScript file (and can be optionally disabled, if you want to use your own colorscheme for syntax highlighting). And eventually I'd like to add some functionality that's useful for PuzzleScript development, such as rotating objects and error detection like how the original editor does it.
-
-Admittedly this plugin will be of limited use, since most people developing PuzzleScript just use the editor built-in to the PuzzleScript site, but I wanted to make this anyway for some practice and since I've been viewing some PuzzleScript games in vim.
-
-General to-do:
-
-- [ ] Clean everything up!
-- [ ] Put on github
-
-Look to some Tim Pope plugins to see probably best-practices:
-https://github.com/tpope/vim-vinegar
-
-## Installation
-
-Install using your favourite package manager, or use Vim's built-in package support:
-
-    mkdir -p ~/.vim/pack/tpope/start
-    cd ~/.vim/pack/tpope/start
-    git clone https://github.com/tpope/vim-vinegar.git
-
-## Usage
-
-**TODO: Maybe move this bit up to the main section??**
-
-Whenever you load a PuzzleScript file with the `.pz` extension (or manually set the filetype with `:set ft=puzzlescript`), this plugin will highlight the file for you. By default the colors are set to mimic the PuzzleScript editor in dark mode.
+With this plugin, whenever you load a PuzzleScript file with the `.pz` extension (or manually set the filetype with `:set ft=puzzlescript`), this plugin will highlight the file for you. By default the colors are set to mimic the PuzzleScript editor in dark mode.
 
 {TODO: Insert screenshot here!}
 
-{TODO: Mention what background color to optimally set, and how to do it.}
+(The dark version of the PuzzleScript syntax highlighting should work OK for most dark background Vim themes, but if you have issues, please see the Extra Settings section below.)
 
 You can switch the PuzzleScript colors to light mode by adding the following to your `.vimrc`:
 
@@ -43,9 +20,7 @@ let g:pz_light_colors = 1
 
 {TODO: Insert screenshot here!}
 
-{TODO: Mention what background color to optimally set, and how to do it.}
-
-*NOTE: The light colors haven't been set up yet, so this will just make no highlighting occur.*
+(The light version of the PuzzleScript syntax highlighting should work OK for most light background Vim themes, but if you have issues, please see the Extra Settings section below.)
 
 Or you can disable these colors entirely and let Vim highlight them according to your current colorscheme. To do so, add this line to your `.vimrc`:
 
@@ -54,51 +29,124 @@ Or you can disable these colors entirely and let Vim highlight them according to
 let g:pz_disable_custom_colors = 1
 ```
 
-*NOTE: The standard highlight groups haven't been set up yet, so this will just make no highlighting occur.*
+*NOTE: The standard highlight groups in this syntax haven't been set up yet, so this will just make no highlighting occur right now. This will be fixed soon.*
 
 
-## ftdetect/puzzlescript.vim
+## General to-do:
 
-**TODO: Remove this section when I no longer need the notes/todos!**
+- [ ] Clean everything up!
 
-clean this up
+- [ ] Check out vim's built in syntax files to see best practices: https://github.com/vim/vim/tree/master/runtime/syntax
 
-look at other ftdetect scripts to see if there's anything else I should do
+- [ ] Look to some Tim Pope plugins to see probably best-practices: https://github.com/tpope/vim-vinegar
+
+- [ ] Look at other syntax plugins to see probably best-practices:
 
 
-## syntax/puzzlescript.vim
+- [ ] Make the syntax work OK in terminals that support 256+ colors.
 
-**TODO: Remove this section when I no longer need the notes/todos!**
+- [ ] Turn the stuff from the Extra Settings section into a plugin that can be optionally disabled (or optionally enabled?), and that returns the settings to normal when leaving a puzzlescript buffer.
+  - See the following for help with that:
+    - https://stackoverflow.com/questions/50134833/set-a-colorscheme-for-a-filetype-in-vim
+    - https://stackoverflow.com/questions/5171184/how-to-set-a-different-colorscheme-for-each-file-type-in-vim
+  - Maybe check out some colorschemes too:
+    - https://github.com/vim/vim/tree/master/runtime/colors
+    - https://github.com/dracula/vim
+  - Maybe check out some other popular plugins:
+    - https://github.com/preservim/nerdtree
+    - https://github.com/vim-airline/vim-airline
 
-Still to do:
 
-- [ ] Highlight the object names in the OBJECTS section
-- [ ] Highlight the characters and names in the LEGEND section
-- [ ] Highlight the object names in the SOUNDS section
-- [ ] Highlight the object names in the COLLISIONLAYERS section
-- [ ] Get `[>` and `|>` highlighting working right (in the RULES section, or everywhere)
-- [ ] Highlight object names in WINCONDITIONS section
-- [ ] Highlight the levels in the LEVELS section
-- [ ] ...and fix anything with a TODO or FIXME label
 
-" TODO: These pzRuleCommandWords show up bold in the rules section, but the
-" ones that are also in pzSoundEvents (like `restart`) don't show up bold in
-" the sounds section.
+## Installation
 
-" TODO: Make 'no' get highlighted differently in rules vs winconditions!
+Install using your favourite package manager, or use Vim's built-in package support:
 
-" TODO: Do `highlight link` instead of just `highlight` so you can link them
-" to proper highlight groups so that people can use whatever colorscheme works
-" for them.
-" See https://vimhelp.org/syntax.txt.html#group-name for the available groups.
+    mkdir -p ~/.vim/pack/joem/start
+    cd ~/.vim/pack/joem/start
+    git clone https://github.com/joem/vim-puzzlescript.git
 
-" TODO: ALSO Add all these colors as a color scheme and set up some rules to
-" optionally use them just for puzzlescript files.
-" See the following for help with that:
-" https://stackoverflow.com/questions/50134833/set-a-colorscheme-for-a-filetype-in-vim
-" https://stackoverflow.com/questions/5171184/how-to-set-a-different-colorscheme-for-each-file-type-in-vim
+Note: The `joem` in `~/.vim/pack/joem/start` above could actually be set to anything you want.
 
-clean up the file and all the temporary lines throughout and at the end
+
+## Extra Settings
+
+This syntax highlighting only changes the typical things that syntax highlighting usually changes. If you _really_ want to make Vim look like the PuzzleScript editor, you'll need to set/change a few other things that are outside the scope of syntax highlighting, like background, line numbers, cursorline, but these end up changing these settings for all open buffers, not just the puzzlescript ones. Perhaps one day I'll add a plugin that optionally sets these for you whenever you switch to a PuzzleScript buffer (and returns them to normal when you leave it), but for now I'll just include the commands that you can set if you'd like.
+
+PuzzleScript dark theme extra settings:
+
+```vim
+" Set the background color:
+hi Normal ctermfg=Green ctermbg=Black guifg=#1DC116 guibg=#0F192A
+
+" Turn on line numbers:
+set number
+
+" Set the line number colors:
+hi LineNr ctermfg=DarkGrey ctermbg=Black guifg=DarkGrey guibg=#0F192A
+
+" Turn on cursorline highlighting:
+set cursorline
+
+" Set the cursorline colors:
+hi CursorLine term=bold cterm=bold guibg=#203040
+
+" Set the cursorlinenr colors:
+hi CursorLineNr ctermfg=DarkGrey ctermbg=Black guifg=#999999 guibg=#19315B
+
+" Set the selection color:
+hi Visual term=reverse cterm=none ctermbg=White gui=none guifg=NONE guibg=#314D67
+```
+
+Or, all on one line, for easy copying'n'pasting into the command line:
+
+```vim
+hi Normal ctermfg=Green ctermbg=Black guifg=#1DC116 guibg=#0F192A | set number | hi LineNr ctermfg=DarkGrey ctermbg=Black guifg=DarkGrey guibg=#0F192A | set cursorline | hi CursorLine term=bold cterm=bold guibg=#203040 | hi CursorLineNr ctermfg=DarkGrey ctermbg=Black guifg=#999999 guibg=#19315B | hi Visual term=reverse cterm=none ctermbg=White gui=none guifg=NONE guibg=#314D67
+```
+
+
+PuzzleScript light theme extra settings:
+
+```vim
+" Set the foreground and background colors:
+hi Normal ctermfg=Green ctermbg=White guifg=#1DC116 guibg=#ffffff
+
+" Turn on line numbers:
+set number
+
+" Set the line number colors:
+hi LineNr ctermfg=DarkGrey ctermbg=White guifg=#999999 guibg=#F5F5F5
+
+" Turn on cursorline highlighting:
+set cursorline
+
+" Set the cursorline colors:
+hi CursorLine term=bold cterm=bold guibg=#E8F2FF
+
+" Set the cursorlinenr colors:
+hi CursorLineNr ctermfg=DarkGrey ctermbg=White guifg=#999999 guibg=#C1C3D1
+
+" Set the selection color:
+hi Visual term=reverse cterm=reverse gui=none guifg=NONE guibg=#EEFFEE
+```
+
+Or, all on one line, for easy copying'n'pasting into the command line:
+
+```vim
+hi Normal ctermfg=Green ctermbg=White guifg=#1DC116 guibg=#ffffff | set number | hi LineNr ctermfg=DarkGrey ctermbg=White guifg=#999999 guibg=#F5F5F5 | set cursorline | hi CursorLine term=bold cterm=bold guibg=#E8F2FF | hi CursorLineNr ctermfg=DarkGrey ctermbg=White guifg=#999999 guibg=#C1C3D1 | hi Visual term=reverse cterm=reverse gui=none guifg=NONE guibg=#EEFFEE
+```
+
+
+## Shortcomings
+
+Note: There are still a few visual differences between this syntax highlighting and PuzzleScript's editor:
+
+- When selecting lines in the PuzzleScript editor, the highlight background color extends all the way to the edge of the editor, but in Vim it only extends as far as the text on each line does. As far as I can tell, there's no way to make Vim's selections work (visually) like the PuzzleScript editor.
+- PuzzleScript's editor shows a thin vertical line separating the line numbers from the file contents, but Vim does not. As far as I know, there's no way to do this in Vim.
+- PuzzleScript's editor shows the object art in the colors that the art is actually in, whereas this doesn't. It might yet be possible to do this, but I haven't figured out how.
+- PuzzleScript's editor detects and highlights the level maps in the LEVELS section, whereas this doesn't. I think there might be a way to do this, but again, I haven't figured it out yet.
+- PuzzleScript's editor's highlighting often can indicate errors, whereas this isn't as smart and won't indicate most errors (though it might show a few in certain places.
+- In PuzzleScript's editor, some keywords are different colors or weights in different sections (for instance, sfx0-sfx9 are normal weight in the SOUNDS section, but bold weight in the RULES section). This should be fixable, but I haven't gotten it working yet.
 
 
 ## License
