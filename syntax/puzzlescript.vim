@@ -27,6 +27,20 @@ endif
 " - [ ] Highlight the levels in the LEVELS section
 " - [ ] ...and fix any of the areas here marked TODO or FIXME.
 
+" TODO: These pzRuleCommandWords show up bold in the rules section, but the
+" ones that are also in pzSoundEvents (like `restart`) don't show up bold in
+" the sounds section.
+
+" TODO: Make 'no' get highlighted differently in rules vs winconditions!
+
+" TODO: Do `highlight link` instead of just `highlight` so you can link them
+" to proper highlight groups so that people can use whatever colorscheme works
+" for them.
+" See https://vimhelp.org/syntax.txt.html#group-name for the available groups.
+
+" TODO: clean up this file and all the temporary lines throughout and at the end
+
+
 
 " PuzzleScript is case sensitive, but we want this to only match `todo` in allcaps
 syn case match
@@ -180,65 +194,74 @@ syntax match pzSoundNumber /\s\zs\d\+\ze$/
 
 " Check whether to apply custom colors or link to standard ones
 if !exists("g:pz_disable_custom_colors") || g:pz_disable_custom_colors == 0
-  " Custom colors
-  " TODO: Move the colors that don't change between light or dark out to
-  " here!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  " Custom colors - Common colors to both light and dark
+
+  " These separators aren't actually highlighted in the puzzlescript editor,
+  " but I've added them here so that they stay gray if you change the Normal
+  " fg color.
+  highlight pzSeparators ctermfg=DarkGray guifg=#808080
+
+  highlight pzcolorgray        ctermfg=LightGray   guifg=#9D9D9D
+  highlight pzcolordarkgray    ctermfg=DarkGray    guifg=#6D6D6D
+  highlight pzcolorred         ctermfg=Red         guifg=#BE2633
+  highlight pzcolordarkred     ctermfg=DarkRed     guifg=#732930
+  highlight pzcolorlightred    ctermfg=Red         guifg=#e06f8b
+  highlight pzcolorlightbrown  ctermfg=Yellow      guifg=#EEB62F
+  highlight pzcolorgreen       ctermfg=Green       guifg=#44891A
+  highlight pzcolordarkgreen   ctermfg=DarkGreen   guifg=#2F484E
+  highlight pzcolorlightgreen  ctermfg=Green       guifg=#A3CE27
+  highlight pzcolorblue        ctermfg=Blue        guifg=#31A2F2
+  highlight pzcolordarkblue    ctermfg=DarkBlue    guifg=#005784
+  highlight pzcolorlightblue   ctermfg=Cyan        guifg=#B2DCEF
+  highlight pzcolorpurple      ctermfg=DarkMagenta guifg=#580780
+  highlight pzcolorpink        ctermfg=Magenta     guifg=#E06F8B
+
+  highlight pzArrow ctermfg=Red guifg=#C11D16
+
+  " SOUNDEVENT color (same as COMMAND color)
+  highlight pzSoundEvents ctermfg=Magenta guifg=#AE81FF
+
+  " SOUNDVERB color (same as COMMAND color)
+  highlight pzSoundVerbs ctermfg=Magenta guifg=#AE81FF
+
+  highlight pzMsgLineAfterMessage ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
+
+  highlight pzSoundNumber ctermfg=Yellow cterm=italic,underline guifg=#FFA500 gui=italic,underline
+
+  " DIRECTION color
+  highlight pzCardinalDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
+  highlight pzRuleDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
+  highlight pzPatternRuleDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
+  highlight pzRuleDirectionChars ctermfg=DarkMagenta guifg=#C11DC1
+
+  highlight pzComment ctermfg=Gray guifg=#428BDD
+  " Treat todo the same as comments
+  highlight pzTodo ctermfg=Gray guifg=#428BDD
+  " TODO: Can I add an option to override this & highlight TODOs if wanted?
+
+
   if !exists("g:pz_light_colors") || g:pz_light_colors == 0
-    " dark theme colors
-
-    " These separatores aren't actually highlighted in the puzzlescript editor, so
-    " this is just a reminder.
-    " highlight pzSeparators ctermfg=White guifg=#ffffff
-
-    highlight pzComment ctermfg=Gray guifg=#428BDD
-    " Treat todo the same as comments
-    highlight pzTodo ctermfg=Gray guifg=#428BDD
-
-    highlight pzArrow ctermfg=Red guifg=#C11D16
-
-    highlight pzEquals ctermfg=Magenta guifg=#AE81FF
-
-    " Highlight 'message' and the text after it
-    highlight pzMsgKeyword ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
-    highlight pzMsgLineAfterMessage ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
-
-    highlight pzBrackets ctermfg=White guifg=#D1EDFF
-
-    " COMMAND color
-    highlight pzSectionNames ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
-
-    highlight pzPreludeCommandWordsKeys ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
-    highlight pzPreludeCommandWordsValues ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
-    highlight pzPreludeCommandWordsWithArgsButEasy ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
-    highlight pzPreludeCommandWords ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
+    " Custom Colors - DARK THEME COLORS
 
     " The ctermfg colors are as good as I can do with the standard 16, I think.
     highlight pzcolorblack       ctermfg=DarkGray    guifg=#555555
-    highlight pzcolorblue        ctermfg=Blue        guifg=#31A2F2
-    highlight pzcolorbrown       ctermfg=Brown       guifg=#A46422
-    " alt brown: #ba7f41
-    highlight pzcolordarkblue    ctermfg=DarkBlue    guifg=#005784
-    highlight pzcolordarkbrown   ctermfg=Brown       guifg=#493C2B
-    " alt darkbrown: #9a5f11
-    highlight pzcolordarkgray    ctermfg=DarkGray    guifg=#6D6D6D
-    highlight pzcolordarkgreen   ctermfg=DarkGreen   guifg=#2F484E
-    highlight pzcolordarkred     ctermfg=DarkRed     guifg=#732930
-    highlight pzcolorgray        ctermfg=LightGray   guifg=#9D9D9D
-    highlight pzcolorgreen       ctermfg=Green       guifg=#44891A
-    highlight pzcolorlightblue   ctermfg=Cyan        guifg=#B2DCEF
-    highlight pzcolorlightbrown  ctermfg=Yellow      guifg=#EEB62F
-    highlight pzcolorlightgray   ctermfg=LightGray   guifg=#c1c1c1
-    highlight pzcolorlightgreen  ctermfg=Green       guifg=#A3CE27
-    highlight pzcolorlightred    ctermfg=Red         guifg=#e06f8b
-    highlight pzcolororange      ctermfg=Yellow      guifg=#EB8931
-    " alt orange: #ff7700
-    highlight pzcolorpink        ctermfg=Magenta     guifg=#E06F8B
-    highlight pzcolorpurple      ctermfg=DarkMagenta guifg=#580780
-    highlight pzcolorred         ctermfg=Red         guifg=#BE2633
-    highlight pzcolortransparent ctermfg=LightGray   guifg=#777777
     highlight pzcolorwhite       ctermfg=White       guifg=#FFFFFF
+    highlight pzcolorlightgray   ctermfg=LightGray   guifg=#c1c1c1
+    highlight pzcolorbrown       ctermfg=Brown       guifg=#A46422
+    highlight pzcolordarkbrown   ctermfg=Brown       guifg=#493C2B
+    highlight pzcolororange      ctermfg=Yellow      guifg=#EB8931
     highlight pzcoloryellow      ctermfg=Yellow      guifg=#F7E26B
-    " alt yellow: #ffce00
+    highlight pzcolortransparent ctermfg=LightGray   guifg=#777777
+
+    " BRACKET color
+    highlight pzBrackets ctermfg=White guifg=#D1EDFF
+    highlight pzLoopWords ctermfg=White guifg=#D1EDFF
+
+    " LOGICWORD color (same as COMMAND color)
+    highlight pzWinconditionWords ctermfg=Magenta guifg=#AE81FF
+
+    " LOGICWORD color (same as COMMAND color)
+    highlight pzLegendLogicwords ctermfg=Magenta guifg=#AE81FF
 
     " COMMAND color
     highlight pzRuleCommandWords ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
@@ -246,25 +269,22 @@ if !exists("g:pz_disable_custom_colors") || g:pz_disable_custom_colors == 0
     " COMMAND color
     highlight pzSfxCommandList ctermfg=Magenta guifg=#AE81FF
 
-    " BRACKET color
-    highlight pzLoopWords ctermfg=White guifg=#D1EDFF
+    highlight pzPreludeCommandWordsKeys ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
+    highlight pzPreludeCommandWordsWithArgsButEasy ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
+    highlight pzPreludeCommandWords ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
 
-    " DIRECTION color
-    highlight pzCardinalDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
-    highlight pzRuleDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
-    highlight pzPatternRuleDirectionWords ctermfg=DarkMagenta guifg=#C11DC1
+    " ASSIGNMENT color
+    highlight pzEquals ctermfg=Magenta guifg=#AE81FF
 
-    " SOUNDEVENT color (same as COMMAND color)
-    highlight pzSoundEvents ctermfg=Magenta guifg=#AE81FF
+    highlight pzMsgKeyword ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
 
-    " SOUNDVERB color (same as COMMAND color)
-    highlight pzSoundVerbs ctermfg=Magenta guifg=#AE81FF
+    highlight pzPreludeCommandWordsValues ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
 
-    " LOGICWORD color (same as COMMAND color)
-    highlight pzWinconditionWords ctermfg=Magenta guifg=#AE81FF
+    " If I ever get LEVEL highlighting working, this is the dark color:
+    "   #AAAAAA (a light gray)
 
-    " LOGICWORD color (same as COMMAND color)
-    highlight pzLegendLogicwords ctermfg=Magenta guifg=#AE81FF
+    " If I ever get ERROR highlighting working, this is the light color:
+    "   #FFFFFF (white)
 
     " These pzPreludeColorPaletteWords words aren't actually getting highlighted
     " specifically in the editor, so maybe we shouldn't do it here. You can
@@ -273,15 +293,64 @@ if !exists("g:pz_disable_custom_colors") || g:pz_disable_custom_colors == 0
     " METADATATEXT color
     highlight pzPreludeColorPaletteWords ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
 
-    " DIRECTION color
-    highlight pzRuleDirectionChars ctermfg=DarkMagenta guifg=#C11DC1
-
-    highlight pzSoundNumber ctermfg=Yellow cterm=italic guifg=#FFA500 gui=italic
+    " COMMAND color
+    highlight pzSectionNames ctermfg=Magenta cterm=bold guifg=#AE81FF gui=bold
 
   else
-    " light theme colors
+    " Custom Colors - LIGHT THEME COLORS
 
-    " TODO: Figure these out!
+    " The ctermfg colors are as good as I can do with the standard 16, I think.
+    highlight pzcolorblack       ctermfg=DarkGray             guifg=#000000
+    highlight pzcolorwhite       ctermfg=White     cterm=BOLD guifg=#dedede gui=BOLD
+    highlight pzcolorlightgray   ctermfg=LightGray            guifg=#ababab
+    highlight pzcolorbrown       ctermfg=Brown                guifg=#ba7f41
+    highlight pzcolordarkbrown   ctermfg=Brown                guifg=#9a5f11
+    highlight pzcolororange      ctermfg=Yellow               guifg=#ff7700
+    highlight pzcoloryellow      ctermfg=Yellow               guifg=#ffce00
+    highlight pzcolortransparent ctermfg=LightGray cterm=BOLD guifg=#c7c7c7 gui=BOLD
+
+    " BRACKET color
+    highlight pzBrackets ctermfg=White guifg=#5170E7
+    highlight pzLoopWords ctermfg=Blue guifg=#5170E7
+
+    " LOGICWORD color
+    highlight pzWinconditionWords ctermfg=Magenta guifg=#b95fdb
+
+    " LOGICWORD color
+    highlight pzLegendLogicwords ctermfg=Magenta guifg=#b95fdb
+
+    " COMMAND color
+    highlight pzRuleCommandWords ctermfg=Magenta cterm=none guifg=#7b47db gui=none
+
+    " COMMAND color
+    highlight pzSfxCommandList ctermfg=Magenta guifg=#7b47db
+
+    highlight pzPreludeCommandWordsKeys ctermfg=Magenta cterm=NONE guifg=#7B47DB gui=NONE
+    highlight pzPreludeCommandWordsWithArgsButEasy ctermfg=Magenta cterm=NONE guifg=#7B47DB gui=NONE
+    highlight pzPreludeCommandWords ctermfg=Magenta cterm=NONE guifg=#7B47DB gui=NONE
+
+    " ASSIGNMENT color
+    highlight pzEquals ctermfg=Magenta guifg=#7c699e
+
+    highlight pzMsgKeyword ctermfg=Magenta cterm=none guifg=#7B47DB gui=none
+
+    highlight pzPreludeCommandWordsValues ctermfg=Yellow cterm=italic guifg=#FF7F00 gui=italic
+
+    " If I ever get LEVEL highlighting working, this is the light color:
+    "   #11635d (sort of a dark aqua)
+
+    " If I ever get ERROR highlighting working, this is the light color:
+    "   #FF0000 (red)
+
+    " These pzPreludeColorPaletteWords words aren't actually getting highlighted
+    " specifically in the editor, so maybe we shouldn't do it here. You can
+    " mispell them and they're still highlighted, as long as it's in the prelude
+    " after _any_ command.
+    " METADATATEXT color
+    highlight pzPreludeColorPaletteWords ctermfg=Yellow cterm=italic guifg=#FF7F00 gui=italic
+
+    " COMMAND color
+    highlight pzSectionNames ctermfg=Magenta cterm=none guifg=#7B47DB gui=none
 
   endif
 else
@@ -301,153 +370,13 @@ let b:current_syntax = "puzzlescript"
 " TODO: Remove this line and everything after it, once you don't need these
 " references anymore!
 
-" ----------------------------------------------------------------------------
-"  Colors from the OG editor:
-" ----------------------------------------------------------------------------
-" These come from src/css/midnight.css but I'm not 100% sure they're right.
-"
-" Note: Don't delete this comment section yet. I still need to get the light
-" version colors!
-
-" #203040 is the background color of the active line, I think?
-" #0F192A is the main background color of the editor, I think?
-" Setting these background colors are for a colorscheme, though, not a syntax
-" highlighting.
-
-" #AE81FF is the purple that's used for metadata labels, section names, equal
-" signs in legend, and in legend, or in legend, verbs in sound, etc
-"
-" .cm-s-midnight span.cm-HEADER {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-ASSIGNMENT {
-"     color: light-dark(#7c699e, #AE81FF);
-" .cm-s-midnight span.cm-LOGICWORD {
-"     color: light-dark(rgb(185, 95, 219), #AE81FF);
-" .cm-s-midnight span.cm-COMMAND {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-MESSAGE_VERB {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-METADATA {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-SOUNDVERB {
-"     color: #AE81FF;
-" .cm-s-midnight span.cm-SOUNDEVENT {
-"     color: #AE81FF;
-" .cm-s-midnight span.cm-header {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-atom {
-"     color: light-dark(#7b47db, #AE81FF);
-" .cm-s-midnight span.cm-link {
-"     color: #AE81FF;
-
-
-" COMMENTS
-" .cm-s-midnight span.cm-comment {
-"     color: #428BDD;
-"     font-style: italic;
-
-
-" The green used for names of objects and stuff
-" .cm-s-midnight span.cm-NAME {
-"     color: #1DC116;
-" .cm-s-midnight span.cm-IDENTIFIER {
-"     color: #1DC116;
-"     font-weight: bold;
-" .cm-s-midnight span.cm-string {
-"     color: #1DC116;
-
-
-" The color used for brackets and pipes in the rules, I think.
-" .cm-s-midnight span.cm-BRACKET {
-"     color: light-dark(rgb(81, 112, 231), #D1EDFF);
-
-
-" The red of an arrow in the rules:
-" .cm-s-midnight span.cm-ARROW {
-"     color: #C11D16;
-
-
-" The slightly different purple of a direction in the rules:
-" .cm-s-midnight span.cm-DIRECTION {
-"     color: #C11DC1;
-
-
-" The orange of the metadata text and the sound number:
-" (#FFA500)
-" .cm-s-midnight span.cm-MESSAGE {
-"     color: orange;
-"     font-style: italic;
-" .cm-s-midnight span.cm-METADATATEXT {
-"     color: light-dark(rgb(255, 127, 0), orange);
-"     font-style: italic;
-" span.cm-SOUND {
-"     color: orange;
-"     text-decoration: underline;
-
-
-" The light gray of a level:
-" .cm-s-midnight span.cm-LEVEL {
-"     color: light-dark(rgb(17, 99, 93), #AAAAAA);
-
-
-" The color colors
-
-" .cm-s-midnight span.cm-COLOR-TRANSPARENT { color: light-dark(rgb(199, 199, 199), #777777);
-
-" .cm-s-midnight span.cm-COLOR-BLACK { color: light-dark(black, #555555);
-
-" .cm-s-midnight span.cm-COLOR-WHITE { color: light-dark(#dedede, #FFFFFF);
-
-" .cm-s-midnight span.cm-COLOR-GREY { color: #9D9D9D;
-
-" .cm-s-midnight span.cm-COLOR-DARKGREY { color: #6D6D6D;
-
-" .cm-s-midnight span.cm-COLOR-DARKGRAY { color: #6D6D6D;
-
-" .cm-s-midnight span.cm-COLOR-LIGHTGREY { color: light-dark(rgb(171, 171, 171), #c1c1c1);
-
-" .cm-s-midnight span.cm-COLOR-LIGHTGRAY { color: light-dark(rgb(171, 171, 171), #c1c1c1);
-
-" .cm-s-midnight span.cm-COLOR-GRAY { color: #9D9D9D;
-
-" .cm-s-midnight span.cm-COLOR-RED { color: #BE2633;
-
-" .cm-s-midnight span.cm-COLOR-DARKRED { color: #732930;
-
-" .cm-s-midnight span.cm-COLOR-LIGHTRED { color: #e06f8b;
-
-" .cm-s-midnight span.cm-COLOR-BROWN { color: light-dark(#ba7f41, #A46422);
-
-" .cm-s-midnight span.cm-COLOR-DARKBROWN { color: light-dark(#9a5f11, #493C2B);
-
-" .cm-s-midnight span.cm-COLOR-LIGHTBROWN { color: #EEB62F;
-
-" .cm-s-midnight span.cm-COLOR-ORANGE { color: light-dark(#ff7700, #EB8931);
-
-" .cm-s-midnight span.cm-COLOR-YELLOW { color: light-dark(#ffce00, #F7E26B);
-
-" .cm-s-midnight span.cm-COLOR-GREEN { color: #44891A;
-
-" .cm-s-midnight span.cm-COLOR-DARKGREEN { color: #2F484E;
-
-" .cm-s-midnight span.cm-COLOR-LIGHTGREEN { color: #A3CE27;
-
-" .cm-s-midnight span.cm-COLOR-BLUE { color: #31A2F2;
-
-" .cm-s-midnight span.cm-COLOR-DARKBLUE { color: #005784;
-
-" .cm-s-midnight span.cm-COLOR-LIGHTBLUE { color: #B2DCEF;
-
-" .cm-s-midnight span.cm-COLOR-PURPLE { color: #580780;
-
-" .cm-s-midnight span.cm-COLOR-PINK { color: #E06F8B;
-
-
 
 
 " ----------------------------------------------------------------------------
 "  Thoughts on how to highlight stuff:
 " ----------------------------------------------------------------------------
+
+"TODO: Rethink these, since some might have been based on color not function!!
 
 " Identifier
 " any variable name
